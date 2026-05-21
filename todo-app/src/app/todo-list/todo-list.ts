@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-todo-list',
   imports: [],
   templateUrl: './todo-list.html',
-  styleUrl: './todo-list.css',
+  styleUrl: './todo-list.scss',
 })
 export class TodoList {}

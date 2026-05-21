@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-todo-admin',
   imports: [],
   templateUrl: './todo-admin.html',
-  styleUrl: './todo-admin.css',
+  styleUrl: './todo-admin.scss',
 })
 export class TodoAdmin {}
