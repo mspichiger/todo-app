@@ -5,7 +5,7 @@ import { Component, inject } from '@angular/core';
   selector: 'app-todo-detail',
   imports: [],
   templateUrl: './todo-detail.html',
-  styleUrl: './todo-detail.css',
+  styleUrl: './todo-detail.scss',
 })
 export class TodoDetail {
   private route = inject(ActivatedRoute);
