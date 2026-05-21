@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-todo-detail',
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './todo-detail.html',
   styleUrl: './todo-detail.css',
 })
-export class TodoDetail {}
+export class TodoDetail {
+  private route = inject(ActivatedRoute);
+  id = this.route.snapshot.paramMap.get('id');
+}
