@@ -18,7 +18,7 @@ export class TodoForm implements OnInit {
     private route = inject(ActivatedRoute);
     private router = inject(Router);
 
-    // id aus der URL: null => neue Aufgabe anlegen, sonst => bestehende Aufgabe bearbeiten
+    // id aus der URL: null => neue Aufgabe , sonst bestehende Aufgabe bearbeiten
     id: number | null = null;
 
     readonly statusOptions: { value: TodoStatus; label: string }[] = [
@@ -42,8 +42,7 @@ export class TodoForm implements OnInit {
         const idParam = this.route.snapshot.paramMap.get('id');
         if (idParam !== null) {
             this.id = Number(idParam);
-            // Hier würde normalerweise ein TodoService die Aufgabe per id vom Backend laden.
-            // Beispielhaftes Vorbefüllen:
+            // Bsp.
             const existing: Todo = {
                 id: this.id,
                 title: `Aufgabe ${this.id}`,
