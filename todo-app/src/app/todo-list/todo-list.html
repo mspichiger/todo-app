@@ -1,26 +1,2 @@
-<div class="todo-list-header">
-    <h2>Todo-Liste</h2>
-    <a class="btn-primary" routerLink="/todos/new">+ Neues Todo</a>
-</div>
-
-<div class="card-grid">
-    @for (todo of todos; track todo.id) {
-    <article class="card" [attr.data-status]="todo.status">
-        <header class="card-header">
-            <h3>{{ todo.title }}</h3>
-            <span class="badge">{{ statusLabel(todo.status) }}</span>
-        </header>
-
-        @if (todo.description) {
-        <p class="card-description">{{ todo.description }}</p>
-        }
-
-        <p class="card-meta">Zugewiesen an: <strong>{{ todo.assignTo }}</strong></p>
-
-        <footer class="card-actions">
-            <a [routerLink]="['/todos', todo.id]">Anzeigen</a>
-            <a [routerLink]="['/todos', todo.id, 'edit']">Bearbeiten</a>
-        </footer>
-    </article>
-    }
-</div>
+<h2>Todo-Liste</h2>
+<p>Hier sind deine offenen Todos</p>

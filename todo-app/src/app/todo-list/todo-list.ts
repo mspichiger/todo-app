@@ -6,7 +6,7 @@ import { Todo } from '../models/todo';
   selector: 'app-todo-list',
   imports: [RouterLink],
   templateUrl: './todo-list.html',
-  styleUrl: './todo-list.css',
+  styleUrl: './todo-list.scss',
 })
 export class TodoList {
   todos: Todo[] = [
