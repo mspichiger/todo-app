@@ -1,0 +1,58 @@
+<h2>{{ isEditMode ? 'Aufgabe bearbeiten' : 'Neue Aufgabe anlegen' }}</h2>
+<p>
+    @if (isEditMode) {
+    Aktualisiert die Aufgabe (PUT /api/todos/{{ id }}). Erfordert die Rolle <code>UPDATE_TODO</code>.
+    } @else {
+    Erstellt eine neue Aufgabe (POST /api/todos). Erfordert die Rolle <code>UPDATE_TODO</code>.
+    }
+</p>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div>
+        <label for="title">Titel der Aufgabe</label>
+        <input id="title" type="text" formControlName="title" placeholder="z. B. Datenbankmigration durchführen" />
+        @if (form.controls.title.touched && form.controls.title.invalid) {
+        <small>
+            @if (form.controls.title.hasError('required')) { Titel ist erforderlich. }
+            @if (form.controls.title.hasError('minlength')) { Mindestens 3 Zeichen. }
+            @if (form.controls.title.hasError('maxlength')) { Maximal 120 Zeichen. }
+        </small>
+        }
+    </div>
+
+    <div>
+        <label for="description">Beschreibung</label>
+        <textarea id="description" formControlName="description" rows="4"
+            placeholder="Detaillierte Beschreibung der Aufgabe (optional)"></textarea>
+        @if (form.controls.description.touched && form.controls.description.hasError('maxlength')) {
+        <small>Maximal 2000 Zeichen.</small>
+        }
+    </div>
+
+    <div>
+        <label for="assignTo">Zugewiesen an</label>
+        <input id="assignTo" type="text" formControlName="assignTo" placeholder="Name des Lernenden" />
+        @if (form.controls.assignTo.touched && form.controls.assignTo.invalid) {
+        <small>
+            @if (form.controls.assignTo.hasError('required')) { Eine Zuweisung ist erforderlich. }
+            @if (form.controls.assignTo.hasError('minlength')) { Mindestens 2 Zeichen. }
+        </small>
+        }
+    </div>
+
+    <div>
+        <label for="status">Status</label>
+        <select id="status" formControlName="status">
+            @for (option of statusOptions; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+            }
+        </select>
+    </div>
+
+    <div style="display:flex; gap:0.5rem; margin-top:1rem;">
+        <button type="submit" [disabled]="form.invalid">
+            {{ isEditMode ? 'Änderungen speichern' : 'Aufgabe anlegen' }}
+        </button>
+        <a routerLink="/todos">Abbrechen</a>
+    </div>
+</form>
