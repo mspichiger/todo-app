@@ -1,22 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { Router, provideRouter } from '@angular/router';
+import { RouterTestingHarness } from '@angular/router/testing';
 
 import { TodoDetail } from './todo-detail';
 
 describe('TodoDetail', () => {
-  let component: TodoDetail;
-  let fixture: ComponentFixture<TodoDetail>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  it('should display todo ID from route parameters', async () => {
+    TestBed.configureTestingModule({
       imports: [TodoDetail],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(TodoDetail);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+      providers: [provideRouter([{ path: 'todos/:id', component: TodoDetail }])],
+    });
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/todos/ABC', TodoDetail);
+    expect(harness.routeNativeElement?.textContent).toContain('ABC');
   });
 });
