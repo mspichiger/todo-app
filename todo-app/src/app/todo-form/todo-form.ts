@@ -6,6 +6,8 @@ import {
     Validators,
 } from '@angular/forms';
 import { Todo, TodoStatus } from '../models/todo';
+import { TodoService } from '../services/todo.service';
+import { map, tap } from 'rxjs';
 
 @Component({
     selector: 'app-todo-form',
@@ -17,6 +19,7 @@ export class TodoForm implements OnInit {
     private fb = inject(FormBuilder);
     private route = inject(ActivatedRoute);
     private router = inject(Router);
+    private todoService = inject(TodoService);
 
     // id aus der URL: null => neue Aufgabe , sonst bestehende Aufgabe bearbeiten
     id: number | null = null;
@@ -50,6 +53,8 @@ export class TodoForm implements OnInit {
                 assignTo: '',
                 status: 'OPEN',
             };
+            var x = this.todoService.getById(this.id).pipe(map(todo => todo.title), tap(console.log));
+            this.todoService.getById(this.id).subscribe(todo => this.form.patchValue(todo))
             this.form.patchValue(existing);
         }
     }
